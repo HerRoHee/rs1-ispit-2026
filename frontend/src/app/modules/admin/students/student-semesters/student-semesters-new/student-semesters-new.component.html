@@ -1,4 +1,76 @@
-<mat-card>
-  <h2>Upis novog semestra</h2>
-  <!-- TODO: Implementirati formu za upis novog semestra -->
-</mat-card>
+<form (ngSubmit)="insertSemester()" [formGroup]="semesterForm">
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Enrollment Date</mat-label>
+
+    <input formControlName="enrollmentDate" matInput [matDatepicker]="picker" required/>
+    <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+
+    <mat-error *ngIf="semesterForm.get('enrollmentDate')?.invalid && semesterForm.get('enrollmentDate')?.touched">
+      <!-- Dinamičko prikazivanje grešaka -->
+      <ng-container *ngIf="semesterForm.get('enrollmentDate')?.errors as errors">
+        <small *ngIf="errors['required']">Enrollment date is required.</small>
+      </ng-container>
+    </mat-error>
+  </mat-form-field> <br>
+
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Study year</mat-label>
+    <input type="number" min="1" max="6" formControlName="studyYear" matInput required/>
+    <mat-error *ngIf="semesterForm.get('studyYear')?.invalid && semesterForm.get('studyYear')?.touched">
+      <!-- Dinamičko prikazivanje grešaka -->
+      <ng-container *ngIf="semesterForm.get('studyYear')?.errors as errors">
+        <small *ngIf="errors['required']">Study year is required.</small>
+        <small *ngIf="errors['min']">Min is 1</small>
+        <small *ngIf="errors['max']">Max is 6</small>
+      </ng-container>
+    </mat-error>
+  </mat-form-field> <br>
+
+  <!-- Academic Year Dropdown -->
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Academic Year</mat-label>
+    <mat-select formControlName="academicYearID" required>
+      <mat-option *ngFor="let year of years" [value]="year.id">
+        {{ year.description }}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="semesterForm.get('academicYearID')?.touched && semesterForm.get('academicYearID')?.errors">
+      <span *ngIf="semesterForm.get('academicYearID')?.errors?.['academicYearID']">Academic year is required.</span>
+    </mat-error>
+  </mat-form-field> <br>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Tuition</mat-label>
+    <input formControlName="tuition" matInput required/>
+    <mat-error *ngIf="semesterForm.get('tuition')?.invalid && semesterForm.get('tuition')?.touched">
+      <!-- Dinamičko prikazivanje grešaka -->
+      <ng-container *ngIf="semesterForm.get('tuition')?.errors as errors">
+        <small *ngIf="errors['required']">Study year is required.</small>
+
+      </ng-container>
+    </mat-error>
+  </mat-form-field> <br>
+
+  <mat-form-field appearance="fill" class="form-field">
+    <mat-label>Renewal</mat-label>
+    <input formControlName="renewal" matInput required/>
+    <mat-error *ngIf="semesterForm.get('renewal')?.invalid && semesterForm.get('renewal')?.touched">
+      <!-- Dinamičko prikazivanje grešaka -->
+      <ng-container *ngIf="semesterForm.get('renewal')?.errors as errors">
+        <small *ngIf="errors['required']">Study year is required.</small>
+
+      </ng-container>
+    </mat-error>
+  </mat-form-field> <br>
+
+  <div class="form-buttons">
+    <button [disabled]="semesterForm.invalid" color="primary" mat-raised-button type="submit">
+      Save Changes
+    </button>
+    <button color="warn" mat-raised-button routerLink="/admin/students" type="button">
+      Cancel
+    </button>
+  </div>
+</form>

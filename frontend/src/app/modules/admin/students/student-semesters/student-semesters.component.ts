@@ -152,6 +152,6 @@ export class StudentSemestersComponent implements OnInit, AfterViewInit {
   }
 
   noviSemestar() {
-    this.router.navigate(['students', this.studentID, 'semesters/new']);
+    this.router.navigate(['/admin/students', this.studentID, 'semesters', 'new']);
   }
 }

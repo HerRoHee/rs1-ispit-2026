@@ -13,7 +13,7 @@ namespace RS1_2024_25.API.Endpoints.SemesterEndpoints
         .WithActionResult
     {
         [HttpPost("{studentID}/semesters")]
-        public override async Task<ActionResult> HandleAsync([FromQuery] SemesterCreateRequest request, CancellationToken cancellationToken = default)
+        public override async Task<ActionResult> HandleAsync([FromBody] SemesterCreateRequest request, CancellationToken cancellationToken = default)
         {
             var recordedBy = authService.GetAuthInfoFromRequest();
             var student = await db.StudentsAll.FindAsync(request.StudentID, cancellationToken);
@@ -69,7 +69,7 @@ namespace RS1_2024_25.API.Endpoints.SemesterEndpoints
             await db.SemestersAll.AddAsync(newSemester, cancellationToken);
             await db.SaveChangesAsync(cancellationToken);
 
-            return Ok("Semester created successfully");
+            return Ok(new { message = "Semester created successfully" });
 
         }
     }

@@ -45,7 +45,9 @@ import { StudentEditComponent } from './students/student-edit/student-edit.compo
 import { StudentSemestersComponent } from './students/student-semesters/student-semesters.component';
 import { StudentSemestersNewComponent } from './students/student-semesters/student-semesters-new/student-semesters-new.component';
 import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
-
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
+import {MAT_DATE_LOCALE} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -96,9 +98,13 @@ import {MatRadioButton, MatRadioGroup} from "@angular/material/radio";
     MatProgressSpinner,
     MatRadioGroup,
     MatRadioButton,
+    MatDatepickerModule,
+    MatNativeDateModule
     // Omogućava pristup svemu što je eksportovano iz SharedModule
   ],
-  providers: []
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
+  ]
 })
 export class AdminModule {
 }
