@@ -23,7 +23,7 @@ namespace RS1_2024_25.API.Endpoints.SemesterEndpoints
             semester.IsDeleted = true;
             await db.SaveChangesAsync(cancellationToken);
 
-            return Ok("Semester deleted successfully");
+            return Ok(new { message = "Semester deleted successfully" });
         }
     }
 }

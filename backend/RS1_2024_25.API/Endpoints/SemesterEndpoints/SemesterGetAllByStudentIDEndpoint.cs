@@ -54,6 +54,7 @@ namespace RS1_2024_25.API.Endpoints.SemesterEndpoints
                 StudyYear = s.StudyYear,
                 EnrollmentDate = s.EnrollmentDate,
                 IsRenewal = s.IsRenewal,
+                TuitionFee = s.TuitionFee,
                 IsDeleted = s.IsDeleted,
             });
 
